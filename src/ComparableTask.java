@@ -1,12 +1,28 @@
-
+//==============================================
+// Andrew Asquith
+// COMP 1231
+// Assignment 2
+// ComparableTask Class 
+//
+// This is the ComparableTask class.
+// It defines a private variable for the priority and 
+// implements the required methods for the Priority Interface
+// It also contains a string for a description
+// trying to set priority outside of the bounds defined by the 
+// interface results in using the highest or lowest as appropriate
+// This class also implements the Comparable interface
+// The compareTo implementation uses the priority as a basis for comparison
+//
+//==============================================
 public class ComparableTask implements Priority, Comparable {
 
+	// private member for priority
 	private int taskPriority;
 
+	// private member for description with default value
 	private String taskDescription = "Undescribed Task";
 
-	// constructor accepting no arguments, sets lowest priority and leaves
-	// default description
+	// constructor accepting no arguments, sets lowest priority and leaves default description
 	public ComparableTask() {
 		taskPriority = Priority.LOWEST_PRIORITY;
 	}
@@ -57,6 +73,7 @@ public class ComparableTask implements Priority, Comparable {
 	}
 
 	// implementation of the compareTo method for the comparable interface
+	// the comparison is performed on the priority of the task
 	public int compareTo(Object arg0) throws IllegalArgumentException, NullPointerException {
 
 		// some constants that satisfy the compareTo requirements 
@@ -68,10 +85,14 @@ public class ComparableTask implements Priority, Comparable {
 		// the reference for the argument to be compared
 		Priority task2;
 
-		// if null was passed, throw a NullPointerException as per the
-		// documentation
+		// if null was passed, throw a NullPointerException as per the documentation
 		if (arg0 == null) {
 			throw new NullPointerException("Argument cannot be null");
+		}
+		
+		// if they are the same reference, return equal_to
+		if (arg0 == this) { 
+			return EQUAL_TO;
 		}
 
 		// the provided argument must implement the priority interface
@@ -80,13 +101,11 @@ public class ComparableTask implements Priority, Comparable {
 			task2 = (Priority) arg0;
 		} else {
 			// if it doesn't throw an IllegalArgumentException
-			// this could be avoided by using the Comparable<T> interface
-			// instead of the raw one
+			// this could be avoided by using the Comparable<T> interface instead of the raw one
 			throw new IllegalArgumentException("Argument must be of type ComparableTask");
 		}
 
-		// determine comparison result based on the priority according to
-		// compareTo contract
+		// determine comparison result based on the priority according to compareTo contract
 		if (taskPriority > task2.getPriority()) {
 
 			// greater than should be positive
@@ -105,4 +124,8 @@ public class ComparableTask implements Priority, Comparable {
 
 	}
 
+	//toString implementation returning priority and description
+	public String toString() {
+		return "Priority: " + taskPriority + " - " + taskDescription;
+	}
 }

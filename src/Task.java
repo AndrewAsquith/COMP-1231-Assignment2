@@ -1,8 +1,23 @@
-
+//==============================================
+// Andrew Asquith
+// COMP 1231
+// Assignment 2
+// Task Class 
+//
+// This is the Task class.
+// It defines a private variable for the priority and 
+// implements the required methods for the Priority Interface
+// it also contains a string for a description
+// trying to set priority outside of the bounds defined by the 
+// interface results in using the highest or lowest as appropriate
+//
+//==============================================
 public class Task implements Priority {
 
+	//private member for priority
 	private int taskPriority;
 	
+	//private member for description with default value
 	private String taskDescription = "Undescribed Task";
 	
 	//constructor accepting no arguments, sets lowest priority and leaves default description
@@ -54,5 +69,9 @@ public class Task implements Priority {
 			taskPriority = priority;
 		}
 	}
-
+	
+	//toString implementation returning priority and description
+	public String toString() {
+		return "Priority: " + taskPriority + " - " + taskDescription;
+	}
 }
